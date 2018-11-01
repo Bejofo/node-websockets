@@ -5,9 +5,11 @@
       var HOST = location.origin.replace(/^http/, 'ws')
       var ws = new WebSocket(HOST);
       var el = document.getElementById('server-time');
-
+      function send(x){
+        ws.send(x);
+      }
       ws.onmessage = function (event) {
-        el.innerHTML = 'Server time: ' + event.data;
+        el.innerHTML +=`${event.data}<br>`;
       };
     </script>
   </body>
