@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const SocketServer = require('ws').Server;
 const path = require('path');
