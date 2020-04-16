@@ -12,13 +12,13 @@ const server = express()
 
 const wss = new SocketServer({ server });
 
-wss.on('connection', function connection(ws,req){
+wss.on('connection', function connection(ws) {
   console.log('WS opened');
-  ws._channel = req.url.split("/").pop();
   ws.on('message', function incoming(data) {
     console.log(data);
+    // Broadcast to everyone else.
     wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN && ws._channel == client._channel ) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(data);
       }
     });
