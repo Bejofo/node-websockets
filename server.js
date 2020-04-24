@@ -13,11 +13,10 @@ const server = express()
 const wss = new SocketServer({ server });
 
 wss.on('connection', function connection(ws,req) {
-  console.log('WS opened: ' + req.url);
-  ws._url = req.url;
+  console.log('WS opened');
   ws.on('message', function incoming(data) {
     wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN && client._url == ws._url) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(data);
       }
     });
